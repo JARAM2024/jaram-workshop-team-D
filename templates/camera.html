@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera Page</title>
+    <script>
+        function fetchDistance() {
+            fetch('/distance')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('distance').innerText = 
+                        `Dist1: ${data.dist1} cm, Dist2: ${data.dist2} cm`;
+                });
+        }
+
+        function fetchLedStatus() {
+            fetch('/led_status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('led_status').innerText = 
+                        data.on ? `LED 켜짐 시각: ${data.time}` : 'LED 꺼짐';
+                });
+        }
+
+        setInterval(fetchDistance, 1000);  // Fetch distance data every second
+        setInterval(fetchLedStatus, 1000); // Fetch LED status every second
+    </script>
+</head>
+<body>
+    <h1>Live Video Feed</h1>
+    <img src="{{ url_for('video_feed') }}" width="600">
+    <h1>Distance Measurements</h1>
+    <p id="distance">Loading...</p>
+    <h1>LED Status</h1>
+    <p id="led_status">Loading...</p>
+</body>
+</html>
