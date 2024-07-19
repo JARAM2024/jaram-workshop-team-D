@@ -76,3 +76,48 @@ document.addEventListener('DOMContentLoaded', function() {
         disableDarkMode();
     }
 });
+
+// HTML 요소들과 상호작용
+document.addEventListener('DOMContentLoaded', () => {
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatOutput = document.getElementById('chatOutput');
+
+    chatForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const userMessage = chatInput.value;
+        chatOutput.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+
+        try {
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer YOURKEY`
+                },
+                body: JSON.stringify({
+                    model: "gpt-4o",
+                    messages: [
+                        { role: "system", content: "You are a delivery arrival notification chatbot service system. You output appropriate messages based on the user's questions. You answer in a language that matches the language the user wrote." },
+                        { role: "user", content: userMessage }
+                    ],
+                    temperature: 1,
+                    max_tokens: 256,
+                    top_p: 1,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                })
+            });
+
+            const data = await response.json();
+            const botMessage = data.choices[0].message.content;
+            chatOutput.innerHTML += `<p><strong>Bot:</strong> ${botMessage}</p>`;
+        } catch (error) {
+            console.error('Error:', error);
+            chatOutput.innerHTML += `<p><strong>Bot:</strong> Sorry, there was an error processing your request.</p>`;
+        }
+
+        chatInput.value = '';
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+    });
+});
