@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_home():
-    return render_template('main_home.html'
+    return render_template('main_home.html')
 
 @app.route('/camera')
 def camera():
