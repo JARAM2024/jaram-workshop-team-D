@@ -178,3 +178,16 @@ a.dark-mode:hover {
         padding: 10px;
     }
 }
+
+/* Styles for the delivery arrival message */
+#led-message {
+    font-size: 3em;
+    color: red;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}

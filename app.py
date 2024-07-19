@@ -6,11 +6,27 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_home():
-    return render_template('main_home.html')
+    return render_template('index.html')
+
+@app.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
 
 @app.route('/camera')
 def camera():
     return render_template('camera.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+@app.route('/donate')
+def donate():
+    return render_template('donate.html')
 
 @app.route('/video_feed')
 def video_feed():
@@ -23,6 +39,10 @@ def distance():
 @app.route('/led_status')
 def led_status():
     return jsonify(trial_b.led_status)
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('./static', path)
 
 def generate_frames():
     cap = cv2.VideoCapture(0)

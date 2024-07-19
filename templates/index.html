@@ -4,19 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="container">
+        <h1 id="led-message" style="display: none;">택배 도착!!!</h1>
         <h1>택배 알리미 서비스</h1>
         <div class="buttons">
-            <button onclick="location.href='camera.html'">Camera</button>
-            <button onclick="location.href='chatbot.html'">Chatbot</button>
-            <button onclick="location.href='login.html'">Login</button>
-            <a href="donate.html"> Donate to developers!</a>
-            <button onclick="location.href='settings.html'" style="position: absolute; top: 10px; right: 10px;">Settings</button>
+            <button onclick="location.href='camera'">Camera</button>
+            <button onclick="location.href='chatbot'">Chatbot</button>
+            <button onclick="location.href='login'">Login</button>
+            <a href="donate"> Donate to developers!</a>
+            <button onclick="location.href='settings'" style="position: absolute; top: 10px; right: 10px;">Settings</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="/static/script.js"></script>
+    <script>
+        function fetchLedStatus() {
+            fetch('/led_status')
+                .then(response => response.json())
+                .then(data => {
+                    const ledMessage = document.getElementById('led-message');
+                    if (data.on) {
+                        ledMessage.style.display = 'block';
+                    } else {
+                        ledMessage.style.display = 'none';
+                    }
+                });
+        }
+
+        setInterval(fetchLedStatus, 1000); // Fetch LED status every second
+    </script>
 </body>
 </html>
