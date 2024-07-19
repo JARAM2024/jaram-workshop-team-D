@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_home():
-    return render_template('main_home.html')
+    return render_template('main_home.html'
 
 @app.route('/camera')
 def camera():
@@ -37,5 +37,6 @@ def generate_frames():
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 if __name__ == '__main__':
-    trial_b.start_sensor()  # Start the sensor in a separate thread
+    # Start the sensor in a separate thread
+    trial_b.start_sensor()
     app.run(host='0.0.0.0', port=5003, debug=True, use_reloader=False)
