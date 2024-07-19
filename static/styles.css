@@ -7,14 +7,14 @@ body, html {
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
+    background-color: white;
 }
 
 .container {
     width: 300px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: #fff;
+    background-color: #f8f8f8;
     border-radius: 10px;
     text-align: center;
 }
@@ -24,6 +24,13 @@ h1 {
     color: #333;
     font-size: 1.5em;
     font-weight: bold;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.0em;
 }
 
 form {
@@ -65,6 +72,7 @@ button:hover {
 }
 
 a {
+    text-align: right;
     display: block;
     margin-top: 10px;
     color: #333;
@@ -76,23 +84,97 @@ a:hover {
     text-decoration: underline;
 }
 
+/* 스위치 스타일 추가 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* 다크 모드 스타일 추가 */
+body.dark-mode {
+    background-color: #333;
+    color: white;
+}
+
+.container.dark-mode {
+    background-color: #444;
+    color: white;
+}
+
+h1.dark-mode {
+    color: white;
+}
+
+h2.dark-mode {
+    color: white;
+}
+
+button.dark-mode {
+    background-color: #555;
+}
+
+button.dark-mode:hover {
+    background-color: #777;
+}
+
+a.dark-mode {
+    color: #bbb;
+}
+
+a.dark-mode:hover {
+    color: #ddd;
+}
+
 /* Additional styles for responsiveness */
 @media (max-width: 600px) {
     .container {
         width: 90%;
         padding: 10px;
     }
-}
-
-/* Styles for the delivery arrival message */
-#led-message {
-    font-size: 3em;
-    color: red;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
 }

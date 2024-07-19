@@ -36,3 +36,43 @@ document.getElementById('createAccountForm')?.addEventListener('submit', functio
         document.getElementById('createError').innerText = '계정 생성 실패';
     }
 });
+
+// 다크 모드 토글 스위치 이벤트
+document.getElementById('themeSwitch')?.addEventListener('change', function() {
+    if (this.checked) {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
+    }
+});
+
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.container').classList.add('dark-mode');
+    document.querySelectorAll('button').forEach(button => button.classList.add('dark-mode'));
+    document.querySelectorAll('a').forEach(link => link.classList.add('dark-mode'));
+    document.querySelectorAll('h1').forEach(title => title.classList.add('dark-mode'));
+    document.querySelectorAll('h2').forEach(subtitle => subtitle.classList.add('dark-mode'));
+    localStorage.setItem('theme', 'dark');
+}
+
+function disableDarkMode() {
+    document.body.classList.remove('dark-mode');
+    document.querySelector('.container').classList.remove('dark-mode');
+    document.querySelectorAll('button').forEach(button => button.classList.remove('dark-mode'));
+    document.querySelectorAll('a').forEach(link => link.classList.remove('dark-mode'));
+    document.querySelectorAll('h1').forEach(title => title.classList.remove('dark-mode'));
+    document.querySelectorAll('h2').forEach(subtitle => subtitle.classList.remove('dark-mode'));
+    localStorage.setItem('theme', 'light');
+}
+
+// 페이지 로드 시 저장된 테마 적용
+document.addEventListener('DOMContentLoaded', function() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+        enableDarkMode();
+        document.getElementById('themeSwitch').checked = true;
+    } else {
+        disableDarkMode();
+    }
+});
